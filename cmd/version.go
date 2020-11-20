@@ -4,8 +4,16 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/theartofeducation/gutenberg/core"
+	"github.com/theartofeducation/gutenberg/tools"
 )
 
+func init() {
+	root.AddCommand(Version)
+}
+
+// Version executes commands for incrementing the package version
+// number in package.json and updating the package CHANGELOG.md
 var Version = &cobra.Command{
 	Use:   "version",
 	Short: "Increment the package version",
@@ -14,6 +22,14 @@ var Version = &cobra.Command{
 				to your repository, and you will be able to review the changes made before
 				committing them.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Incrementing package version and updating CHANGELOG.md")
+		tools.GitLogShort()
+
+		packageFolderInfo := core.GetPackageFolders(packagesFolder)
+
+		for _, pfi := range packageFolderInfo {
+			fmt.Printf("%s\n", pfi.Name())
+			// os.Chdir to package folder path
+			// core.ShellExec "yarn run version"
+		}
 	},
 }
