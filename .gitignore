@@ -11,3 +11,6 @@
 # Vendor
 node_modules
 yarn-error.log
+
+# Executables
+gutenberg
