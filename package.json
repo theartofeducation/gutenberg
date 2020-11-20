@@ -1,22 +1,22 @@
 {
-  "name": "go-template-repo",
+  "name": "@aoeu/gutenberg",
   "version": "0.0.1",
   "private": true,
-  "description": "A template repo for quickly starting Go projects.",
+  "description": "Go CLI tool for handling web package version incrementing, tagging and publishing",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theartofeducation/go-template-repo.git"
+    "url": "git+https://github.com/theartofeducation/gutenberg.git"
   },
   "author": {
-    "name": "Christopher Lamm",
-    "email": "chris@theantichris.com",
-    "url": "https://github.com/theantichris"
+    "name": "Bob Yexley",
+    "email": "bob@yexley.net",
+    "url": "https://github.com/ryexley"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/theartofeducation/go-template-repo/issues"
+    "url": "https://github.com/theartofeducation/gutenberg/issues"
   },
-  "homepage": "https://github.com/theartofeducation/go-template-repo#readme",
+  "homepage": "https://github.com/theartofeducation/gutenberg#readme",
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
