@@ -27,9 +27,9 @@ func GitTag(workingDir, version string) {
 		"-a",
 		"v" + version,
 		"-m",
-		`"Release v`+version+`"`,
+		`"Release v` + version + `"`,
 		"--sign",
 	}
 
-	ShellExec(workingDir, gitCommand, commandArgs ...)
+	ShellExec(workingDir, gitCommand, commandArgs...)
 }

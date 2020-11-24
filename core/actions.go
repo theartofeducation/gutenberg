@@ -5,7 +5,7 @@ package core
 func RunTaskForPackages(packages []string, action string) {
 	actions := map[string]func(string){
 		"version": VersionPackage,
-		"tag": TagPackage,
+		"tag":     TagPackage,
 	}
 
 	for _, pf := range packages {
