@@ -1,9 +1,5 @@
 package core
 
-import (
-	"path"
-)
-
 // RunTaskForPackages will execute the given action (yarn task)
 // in each of the package folders contained in the given packagesFolder.
 func RunTaskForPackages(packages []string, action string) {
@@ -22,8 +18,7 @@ func RunTaskForPackages(packages []string, action string) {
 
 // VersionPackage increments the version of the package in the given packageFolder.
 func VersionPackage(packageFolder string) {
-	packageJSONFilePath := path.Join(packageFolder, "package.json")
-	packageJSONData := ReadPackageJSON(packageJSONFilePath)
+	packageJSONData := ReadPackageJSON(packageFolder)
 
 	log.Infof("Updating package %s\n", packageJSONData.Name)
 
