@@ -36,7 +36,7 @@ func VersionPackage(packageFolder string) {
 	_ = s.Color("blue")
 	s.Suffix = fmt.Sprintf(" Updating package %s", packageJSONData.Name)
 
-	YarnRunVersion()
+	YarnRunVersion(packageFolder)
 
 	s.FinalMSG = "✅ Package(s) updated"
 	s.Stop()

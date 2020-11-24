@@ -9,8 +9,13 @@ import (
 )
 
 // ShellExec executes the given command in the OS shell.
-func ShellExec(command string, args ...string) {
+func ShellExec(workingDir string, command string, args ...string) {
 	shellCommand := exec.Command(command, args...)
+
+	if err := os.Chdir(workingDir); err != nil {
+		log.Println(err.Error())
+	}
+
 	output, err := shellCommand.Output()
 	if err != nil {
 		log.Fatal(err)
