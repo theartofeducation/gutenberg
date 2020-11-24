@@ -59,7 +59,7 @@ func init() {
 	root.PersistentFlags().StringVarP(&packagesFolder, "packages-folder", "p", "", "Relative path to packages folder")
 }
 
-// Execute run Gutenberg
+// Execute runs Gutenberg. Who runs Gutenberg? Masterblaster runs Gutenberg.
 func Execute() {
 	if err := root.Execute(); err != nil {
 		fmt.Println(err)
