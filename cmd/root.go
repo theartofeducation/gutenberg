@@ -3,22 +3,55 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"path"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/theartofeducation/gutenberg/core"
 )
 
 var packagesFolder string
+var packages []string
 
 var root = &cobra.Command{
 	Use:   "gutenberg",
 	Short: "Version, Tag and Release your projects",
 	Long:  `Handles all aspects of deploying a shared package for use in dependent projects`,
-	Run: func(cmd *cobra.Command, args []string) {
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		currentWorkingDirectory, err := os.Getwd()
+
+		if packagesFolder != "" {
+			packageFolders := core.GetPackageFolders(packagesFolder)
+			for _, pf := range packageFolders {
+				packageFolder, err := filepath.Abs(path.Join(currentWorkingDirectory, packagesFolder, pf.Name()))
+
+				if err != nil {
+					fmt.Printf("ERROR listing package folders: %v", err)
+					os.Exit(1)
+				}
+
+				packages = append(packages, packageFolder)
+			}
+		} else {
+			packageFolder, err := filepath.Abs(currentWorkingDirectory)
+
+			if err != nil {
+				fmt.Printf("ERROR listing package folder: %v", err)
+				os.Exit(1)
+			}
+
+			packages = append(packages, packageFolder)
+		}
+
+		if err != nil {
+			fmt.Println(err)
+		}
 	},
+	Run: func(cmd *cobra.Command, args []string) {},
 }
 
 func init() {
-	root.PersistentFlags().StringVarP(&packagesFolder, "packages-folder", "p", "components", "Relative path to packages folder")
+	root.PersistentFlags().StringVarP(&packagesFolder, "packages-folder", "p", "", "Relative path to packages folder")
 }
 
 // Execute run Gutenberg

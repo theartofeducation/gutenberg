@@ -1,6 +1,4 @@
-package tools
-
-import "github.com/theartofeducation/gutenberg/core"
+package core
 
 var yarnCommand string = "yarn"
 
@@ -8,12 +6,12 @@ var yarnCommand string = "yarn"
 func YarnRun() {
 	commandArgs := []string{"run"}
 
-	core.ShellExec(yarnCommand, commandArgs...)
+	ShellExec(yarnCommand, commandArgs...)
 }
 
 // YarnRunVersion executes the "yarn run version" command in the shell
 func YarnRunVersion() {
 	commandArgs := []string{"run", "version"}
 
-	core.ShellExec(yarnCommand, commandArgs...)
+	ShellExec(yarnCommand, commandArgs...)
 }

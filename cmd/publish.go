@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/theartofeducation/gutenberg/core"
+	"github.com/ttacon/chalk"
 )
 
 func init() {
@@ -15,8 +17,9 @@ var Publish = &cobra.Command{
 	Use:   "publish",
 	Short: "Publish your package(s) to the registry",
 	Long: `This command will publish your package(s) to the configured package
-				registry (typically either npm or GitHub).`,
+registry (typically either npm or GitHub).`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Publishing your package")
+		fmt.Println(chalk.Cyan, "📦 Publishing project package(s)", chalk.Reset)
+		core.RunTaskForPackages(packages, "publish")
 	},
 }
