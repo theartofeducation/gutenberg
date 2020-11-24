@@ -12,8 +12,9 @@ const filename = "package.json"
 
 // PackageJSON package.json data.
 type PackageJSON struct {
-	Name    string
-	Version string
+	Name       string
+	Version    string
+	Workspaces []string
 }
 
 // ReadPackageJSON reads the `name` and `version` values from the package.json file

@@ -1,36 +1,32 @@
 package core
 
-// RunTaskForPackages will execute the given action (yarn task)
+// RunAction will execute the given action (yarn task)
 // in each of the package folders contained in the given packagesFolder.
-func RunTaskForPackages(packages []string, action string) {
-	actions := map[string]func(string){
+func RunAction(action string) {
+	actions := map[string]func(){
 		"version": VersionPackage,
 		"tag":     TagPackage,
 	}
 
-	for _, pf := range packages {
-		if _, ok := actions[action]; !ok {
-			log.Infof("The %s action is not yet implemented\n", action)
-		}
-
-		actions[action](pf)
+	if _, exists := actions[action]; !exists {
+		log.Infof("The %s action is not yet implemented\n", action)
 	}
+
+	actions[action]()
 }
 
 // VersionPackage increments the version of the package in the given packageFolder.
-func VersionPackage(packageFolder string) {
-	packageJSONData := ReadPackageJSON(packageFolder)
+func VersionPackage() {
+	rootPackageJSONData := ReadPackageJSON(workingDirectory)
 
-	log.Infof("Updating package %s\n", packageJSONData.Name)
-
-	YarnRunVersion(packageFolder)
+	YarnRunVersion(rootPackageJSONData)
 }
 
 // TagPackage adds a Git tag to a package with the updated version.
-func TagPackage(packageFolder string) {
-	packageJSONData := ReadPackageJSON(packageFolder)
+func TagPackage() {
+	rootPackageJSONData := ReadPackageJSON(workingDirectory)
 
-	log.Infof("Tagging package %s with v%s\n", packageJSONData.Name, packageJSONData.Version)
+	log.Infof("Tagging package %s with v%s\n", rootPackageJSONData.Name, rootPackageJSONData.Version)
 
-	GitTag(packageFolder, packageJSONData.Version)
+	// GitTag(packageFolder, rootPackageJSONData.Version)
 }

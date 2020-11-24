@@ -1,9 +1,14 @@
 package main
 
 import (
-	"github.com/theartofeducation/gutenberg/cmd"
+	"os"
+
+	"github.com/sirupsen/logrus"
+	"github.com/theartofeducation/gutenberg/core"
 )
 
 func main() {
-	cmd.Execute()
+	log := logrus.New()
+	workingDirectory, _ := os.Getwd()
+	core.Execute(log, workingDirectory)
 }

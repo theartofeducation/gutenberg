@@ -6,23 +6,13 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
-
-	"github.com/sirupsen/logrus"
 )
 
-var log *logrus.Logger
-
-// Init initialize the core package with shared resources.
-func Init() {
-	log = logrus.New()
-}
-
 // ShellExec executes the given command in the OS shell.
-func ShellExec(workingDir string, command string, args ...string) {
+func ShellExec(command string, args ...string) {
 	var commandOutput bytes.Buffer
 	var commandError bytes.Buffer
 	shellCommand := exec.Command(command, args...)
-	shellCommand.Dir = workingDir
 	shellCommand.Stdout = &commandOutput
 	shellCommand.Stderr = &commandError
 

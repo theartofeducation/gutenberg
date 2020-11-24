@@ -1,27 +1,27 @@
 package core
 
-var gitCommand string = "git"
+const gitCommand = "git"
 
 // GitLog runs "git log" in the shell.
-func GitLog(workingDir string) {
+func GitLog() {
 	commandArgs := []string{"log"}
 
-	ShellExec(workingDir, gitCommand, commandArgs...)
+	ShellExec(gitCommand, commandArgs...)
 }
 
 // GitLogShort runs "git log --pretty=oneline --abbrev-commit" in the shell.
-func GitLogShort(workingDir string) {
+func GitLogShort() {
 	commandArgs := []string{
 		"log",
 		"--pretty=oneline",
 		"--abbrev-commit",
 	}
 
-	ShellExec(workingDir, gitCommand, commandArgs...)
+	ShellExec(gitCommand, commandArgs...)
 }
 
 // GitTag executes "git tag" for the specified version.
-func GitTag(workingDir, version string) {
+func GitTag(version string) {
 	commandArgs := []string{
 		"tag",
 		"-a",
@@ -31,5 +31,5 @@ func GitTag(workingDir, version string) {
 		"--sign",
 	}
 
-	ShellExec(workingDir, gitCommand, commandArgs...)
+	ShellExec(gitCommand, commandArgs...)
 }
