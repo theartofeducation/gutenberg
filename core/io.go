@@ -7,14 +7,14 @@ import (
 	"os"
 )
 
-// PackageJSON package.json data
+// PackageJSON package.json data.
 type PackageJSON struct {
 	Name    string
 	Version string
 }
 
 // ReadPackageJSON reads the `name` and `version` values from the package.json file
-// at the given filepath, and returns a packageJSON struct with those values
+// at the given filepath, and returns a packageJSON struct with those values.
 func ReadPackageJSON(filepath string) PackageJSON {
 	var packageJSONData PackageJSON
 

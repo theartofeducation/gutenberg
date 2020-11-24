@@ -13,7 +13,7 @@ func init() {
 }
 
 // Tag executes commands for applying a tag to the package repository
-// using the version from the package.json file
+// using the version from the package.json file.
 var Tag = &cobra.Command{
 	Use:   "tag",
 	Short: "Apply a version tag to your repository",

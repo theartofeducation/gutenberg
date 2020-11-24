@@ -13,7 +13,7 @@ func init() {
 }
 
 // Version executes commands for incrementing the package version
-// number in package.json and updating the package CHANGELOG.md
+// number in package.json and updating the package CHANGELOG.md.
 var Version = &cobra.Command{
 	Use:   "version",
 	Short: "Increment the package version",

@@ -14,4 +14,6 @@ func YarnRunVersion(workingDir string) {
 	commandArgs := []string{"run", "version"}
 
 	ShellExec(workingDir, yarnCommand, commandArgs...)
+
+	log.Infoln("Version(s) has been incremented, and CHANGELOG file(s) have been updated. Please review the changes that were made and commit them, and continue on to the next step in the process: `gutenberg tag`.")
 }

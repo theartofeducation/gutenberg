@@ -12,7 +12,7 @@ func init() {
 	root.AddCommand(Publish)
 }
 
-// Publish executes commands for publishing the package to the registry
+// Publish executes commands for publishing the package to the registry.
 var Publish = &cobra.Command{
 	Use:   "publish",
 	Short: "Publish your package(s) to the registry",

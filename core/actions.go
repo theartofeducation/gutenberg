@@ -6,7 +6,7 @@ import (
 )
 
 // RunTaskForPackages will execute the given action (yarn task)
-// in each of the package folders contained in the given packagesFolder
+// in each of the package folders contained in the given packagesFolder.
 func RunTaskForPackages(packages []string, action string) {
 	actions := map[string]func(string){
 		"version": VersionPackage,
@@ -21,7 +21,7 @@ func RunTaskForPackages(packages []string, action string) {
 	}
 }
 
-// VersionPackage increments the version of the package in the given packageFolder
+// VersionPackage increments the version of the package in the given packageFolder.
 func VersionPackage(packageFolder string) {
 	packageJSONFilePath := path.Join(packageFolder, "package.json")
 	packageJSONData := ReadPackageJSON(packageJSONFilePath)

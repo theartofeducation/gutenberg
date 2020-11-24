@@ -12,7 +12,7 @@ import (
 
 var log *logrus.Logger
 
-// Init initialize the core package with shared resources
+// Init initialize the core package with shared resources.
 func Init() {
 	log = logrus.New()
 }
