@@ -26,6 +26,7 @@ func ShellExec(workingDir string, command string, args ...string) {
 	shellCommand.Stdout = &commandOutput
 	shellCommand.Stderr = &commandError
 
+	log.Infof("Executing command %s", shellCommand.String())
 	err := shellCommand.Run()
 
 	if err != nil {
