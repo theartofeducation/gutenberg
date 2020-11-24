@@ -1,27 +1,38 @@
 package core
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
+
+	"github.com/sirupsen/logrus"
 )
+
+var log *logrus.Logger
+
+// Init initialize the core package with shared resources
+func Init() {
+	log = logrus.New()
+}
 
 // ShellExec executes the given command in the OS shell.
 func ShellExec(workingDir string, command string, args ...string) {
+	var commandOutput bytes.Buffer
+	var commandError bytes.Buffer
 	shellCommand := exec.Command(command, args...)
+	shellCommand.Dir = workingDir
+	shellCommand.Stdout = &commandOutput
+	shellCommand.Stderr = &commandError
 
-	if err := os.Chdir(workingDir); err != nil {
-		log.Println(err.Error())
-	}
+	err := shellCommand.Run()
 
-	output, err := shellCommand.Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Errorf("ERROR executing command %q: %s (%s)\n", command, commandError.String(), err.Error())
 	}
 
-	fmt.Println(string(output))
+	log.Infof("%s\n", commandOutput.String())
 }
 
 // GetPackageFolders returns a list of folders that contain package.json files.

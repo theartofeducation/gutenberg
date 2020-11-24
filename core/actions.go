@@ -3,9 +3,6 @@ package core
 import (
 	"fmt"
 	"path"
-	"time"
-
-	"github.com/briandowns/spinner"
 )
 
 // RunTaskForPackages will execute the given action (yarn task)
@@ -26,18 +23,10 @@ func RunTaskForPackages(packages []string, action string) {
 
 // VersionPackage increments the version of the package in the given packageFolder
 func VersionPackage(packageFolder string) {
-	s := spinner.New(spinner.CharSets[14], 75*time.Millisecond)
-	s.Suffix = " Getting package data"
-	s.Start()
-
 	packageJSONFilePath := path.Join(packageFolder, "package.json")
 	packageJSONData := ReadPackageJSON(packageJSONFilePath)
 
-	_ = s.Color("blue")
-	s.Suffix = fmt.Sprintf(" Updating package %s", packageJSONData.Name)
+	fmt.Printf("Updating package %s\n", packageJSONData.Name)
 
 	YarnRunVersion(packageFolder)
-
-	s.FinalMSG = "✅ Package(s) updated"
-	s.Stop()
 }

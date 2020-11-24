@@ -23,6 +23,7 @@ var root = &cobra.Command{
 		var packageFolder string
 		var err error
 
+		core.Init()
 		currentWorkingDirectory, err := os.Getwd()
 
 		if packagesFolder != "" {
