@@ -5,6 +5,7 @@ package core
 func RunTaskForPackages(packages []string, action string) {
 	actions := map[string]func(string){
 		"version": VersionPackage,
+		"tag": TagPackage,
 	}
 
 	for _, pf := range packages {
@@ -23,4 +24,13 @@ func VersionPackage(packageFolder string) {
 	log.Infof("Updating package %s\n", packageJSONData.Name)
 
 	YarnRunVersion(packageFolder)
+}
+
+// TagPackage adds a Git tag to a package with the updated version.
+func TagPackage(packageFolder string) {
+	packageJSONData := ReadPackageJSON(packageFolder)
+
+	log.Infof("Tagging package %s with v%s\n", packageJSONData.Name, packageJSONData.Version)
+
+	GitTag(packageFolder, packageJSONData.Version)
 }

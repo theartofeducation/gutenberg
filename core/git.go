@@ -11,7 +11,25 @@ func GitLog(workingDir string) {
 
 // GitLogShort runs "git log --pretty=oneline --abbrev-commit" in the shell.
 func GitLogShort(workingDir string) {
-	commandArgs := []string{"log", "--pretty=oneline", "--abbrev-commit"}
+	commandArgs := []string{
+		"log",
+		"--pretty=oneline",
+		"--abbrev-commit",
+	}
 
 	ShellExec(workingDir, gitCommand, commandArgs...)
+}
+
+// GitTag executes "git tag" for the specified version.
+func GitTag(workingDir, version string) {
+	commandArgs := []string{
+		"tag",
+		"-a",
+		"v" + version,
+		"-m",
+		`"Release v`+version+`"`,
+		"--sign",
+	}
+
+	ShellExec(workingDir, gitCommand, commandArgs ...)
 }
