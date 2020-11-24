@@ -1,7 +1,6 @@
 package core
 
 import (
-	"fmt"
 	"path"
 )
 
@@ -14,7 +13,7 @@ func RunTaskForPackages(packages []string, action string) {
 
 	for _, pf := range packages {
 		if _, ok := actions[action]; !ok {
-			fmt.Printf("The %s action is not yet implemented\n", action)
+			log.Infof("The %s action is not yet implemented\n", action)
 		}
 
 		actions[action](pf)
@@ -26,7 +25,7 @@ func VersionPackage(packageFolder string) {
 	packageJSONFilePath := path.Join(packageFolder, "package.json")
 	packageJSONData := ReadPackageJSON(packageJSONFilePath)
 
-	fmt.Printf("Updating package %s\n", packageJSONData.Name)
+	log.Infof("Updating package %s\n", packageJSONData.Name)
 
 	YarnRunVersion(packageFolder)
 }
