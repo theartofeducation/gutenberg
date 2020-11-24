@@ -9,8 +9,8 @@ import (
 
 // PackageJSON package.json data
 type PackageJSON struct {
-	Name    string `json:"name"`
-	Version string `json:"version"`
+	Name    string
+	Version string
 }
 
 // ReadPackageJSON reads the `name` and `version` values from the package.json file
@@ -19,13 +19,14 @@ func ReadPackageJSON(filepath string) PackageJSON {
 	var packageJSONData PackageJSON
 
 	fileData, err := ioutil.ReadFile(filepath)
-
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
 
-	json.Unmarshal(fileData, &packageJSONData)
+	if err = json.Unmarshal(fileData, &packageJSONData); err != nil {
+		fmt.Println(err.Error())
+	}
 
 	return packageJSONData
 }

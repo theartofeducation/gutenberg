@@ -10,8 +10,10 @@ import (
 	"github.com/theartofeducation/gutenberg/core"
 )
 
-var packagesFolder string // The folder that contains all the packages to execute the actions on.
-var packages []string // List of folders the actions will be executed on.
+var (
+	packagesFolder string // The folder that contains all the packages to execute the actions on.
+	packages []string // List of folders the actions will be executed on.
+)
 
 var root = &cobra.Command{
 	Use:   "gutenberg",

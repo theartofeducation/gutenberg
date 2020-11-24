@@ -8,11 +8,10 @@ import (
 	"os/exec"
 )
 
-// ShellExec executes the given command in the OS shell
+// ShellExec executes the given command in the OS shell.
 func ShellExec(command string, args ...string) {
 	shellCommand := exec.Command(command, args...)
 	output, err := shellCommand.Output()
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -20,10 +19,9 @@ func ShellExec(command string, args ...string) {
 	fmt.Println(string(output))
 }
 
-// GetPackageFolders returns a list of folders that contain package.json files
+// GetPackageFolders returns a list of folders that contain package.json files.
 func GetPackageFolders(packagesFolder string) []os.FileInfo {
 	files, err := ioutil.ReadDir("./" + packagesFolder)
-
 	if err != nil {
 		log.Fatal(err)
 	}

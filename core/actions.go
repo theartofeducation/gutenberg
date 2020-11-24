@@ -11,13 +11,16 @@ import (
 // RunTaskForPackages will execute the given action (yarn task)
 // in each of the package folders contained in the given packagesFolder
 func RunTaskForPackages(packages []string, action string) {
+	actions := map[string]func(string){
+		"version": VersionPackage,
+	}
+
 	for _, pf := range packages {
-		switch action {
-		case "version":
-			VersionPackage(pf)
-		default:
+		if _, ok := actions[action]; !ok {
 			fmt.Printf("The %s action is not yet implemented\n", action)
 		}
+
+		actions[action](pf)
 	}
 }
 
@@ -26,11 +29,15 @@ func VersionPackage(packageFolder string) {
 	s := spinner.New(spinner.CharSets[14], 75*time.Millisecond)
 	s.Suffix = " Getting package data"
 	s.Start()
+
 	packageJSONFilePath := path.Join(packageFolder, "package.json")
 	packageJSONData := ReadPackageJSON(packageJSONFilePath)
-	s.Color("blue")
+
+	_ = s.Color("blue")
 	s.Suffix = fmt.Sprintf(" Updating package %s", packageJSONData.Name)
+
 	YarnRunVersion()
+
 	s.FinalMSG = "✅ Package(s) updated"
 	s.Stop()
 }
