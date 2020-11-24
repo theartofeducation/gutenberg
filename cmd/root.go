@@ -18,12 +18,15 @@ var root = &cobra.Command{
 	Short: "Version, Tag and Release your projects",
 	Long:  `Handles all aspects of deploying a shared package for use in dependent projects`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		var packageFolder string
+		var err error
+
 		currentWorkingDirectory, err := os.Getwd()
 
 		if packagesFolder != "" {
 			packageFolders := core.GetPackageFolders(packagesFolder)
 			for _, pf := range packageFolders {
-				packageFolder, err := filepath.Abs(path.Join(currentWorkingDirectory, packagesFolder, pf.Name()))
+				packageFolder, err = filepath.Abs(path.Join(currentWorkingDirectory, packagesFolder, pf.Name()))
 
 				if err != nil {
 					fmt.Printf("ERROR listing package folders: %v", err)
@@ -33,7 +36,7 @@ var root = &cobra.Command{
 				packages = append(packages, packageFolder)
 			}
 		} else {
-			packageFolder, err := filepath.Abs(currentWorkingDirectory)
+			packageFolder, err = filepath.Abs(currentWorkingDirectory)
 
 			if err != nil {
 				fmt.Printf("ERROR listing package folder: %v", err)
