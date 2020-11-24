@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	packagesFolder string // The folder that contains all the packages to execute the actions on.
-	packages []string // List of folders the actions will be executed on.
+	packagesFolder string   // The folder that contains all the packages to execute the actions on.
+	packages       []string // List of folders the actions will be executed on.
 )
 
 var root = &cobra.Command{

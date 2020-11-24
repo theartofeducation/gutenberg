@@ -3,15 +3,15 @@ package core
 var gitCommand string = "git"
 
 // GitLog runs "git log" in the shell.
-func GitLog() {
+func GitLog(workingDir string) {
 	commandArgs := []string{"log"}
 
-	ShellExec(gitCommand, commandArgs...)
+	ShellExec(workingDir, gitCommand, commandArgs...)
 }
 
 // GitLogShort runs "git log --pretty=oneline --abbrev-commit" in the shell.
-func GitLogShort() {
+func GitLogShort(workingDir string) {
 	commandArgs := []string{"log", "--pretty=oneline", "--abbrev-commit"}
 
-	ShellExec(gitCommand, commandArgs...)
+	ShellExec(workingDir, gitCommand, commandArgs...)
 }
